@@ -1,0 +1,183 @@
+Function Definition:   
+
+STEP 1: START 
+
+STEP 2: FUNCTION group_strength_checker_pref(): 
+
+STEP 3:     for i in range (1, 31): 
+
+STEP 4:         while True: 
+
+STEP 5:             gs <- int (input(f'Hi ! Group {i}, Please enter your group strength:')) 
+
+STEP 6:             IF gs <= 3 AND gs != 0: 
+
+STEP 7:                 OUTPUT 'Your group has been accepted!' 
+
+STEP 8:                 OUTPUT 'Please enter 5 mentor names as preference:' 
+
+STEP 9:                 for j in range (5): 
+
+STEP 10:                     while True: 
+
+STEP 11:                         choice <- int(input('Please enter a mentor Number:\n101 for A\n102 for B\n103 			for C\n104 for ' 
+
+STEP 12:                                 'D\n105 for E\n106 for F\n107 for G\n108 for H\n109 for I\n110 for I\n111 				for J\n112 for K\n113 for L\n114 for M\n115 for N')) 
+
+STEP 13:                         IF choice not in group_mentor_preference[i - 1]: 
+
+STEP 14:                             group_mentor_preference[i - 1] [j] <- choice 
+
+STEP 15:                             break 
+
+STEP 16:                         ELSE: 
+
+STEP 17:                             OUTPUT 'Mentor already selected, pick a different mentor!' 
+
+STEP 18:                         ENDIF 
+
+STEP 19:                     ENDWHILE 
+
+STEP 20:                 ENDFOR 
+
+STEP 21:                 group_strength.append(gs) 
+
+STEP 22:                 break 
+
+STEP 23:             ELSE: 
+
+STEP 24:                 OUTPUT 'Group must have between 1 AND 3 people, please enter again!' 
+
+STEP 25:             ENDIF 
+
+STEP 26: 	ENDWHILE 
+
+STEP 27: ENDFUNCTION 
+
+  
+
+Function Definition:       
+
+STEP 1: START  
+
+STEP 2: FUNCTION mentor_preference(): 
+
+STEP 3:     for i in range (1, 16): 
+
+STEP 4:         OUTPUT f'Hi! Mentor {100+i}!' 
+
+STEP 5:         for j in range (3): 
+
+STEP 6:             while True: 
+
+STEP 7:                 choice <- int (input ('Please enter a group Number as per preference:')) 
+
+STEP 8:                 IF choice not in mentor_group_preference[i - 1]: 
+
+STEP 9:                     mentor_group_preference[i - 1] [j] <- choice 
+
+STEP 10:                     break 
+
+STEP 11:                 ELSE: 
+
+STEP 12:                     OUTPUT 'Group already selected, pick a different group!' 
+
+STEP 13:                 ENDIF 
+
+STEP 14:              ENDWHILE   
+
+STEP 15: 		ENDFOR 
+
+STEP 16: 	ENDFOR 
+
+STEP 17: ENDFUNCTION 
+
+  
+
+             
+
+ 
+
+ 
+
+  
+
+Driver Code: 
+
+STEP 1:	START 
+
+STEP 2:    group_mentor_preference <- [[0] * 5 for _ in range (30)]                             
+
+STEP 3:    mentor_group_preference <- [[None] * 3 for _ in range (15)]                                    
+
+STEP 4:    mentor_dict <- {101: [], 102: [], 103: [], 104: [], 105: [], 106: [], 107: [], 108: [], 109: [], 110: [], 			111: [], 112: [], 113: [],114: [],115: []} 
+
+STEP 5:    group_strength <- [] 
+
+STEP 6:    group_strength_checker_pref() 
+
+STEP 7:    mentor_preference() 
+
+STEP 8:    # mentor assignment as per round AND choice 
+
+STEP 9:    for a_round in range (5): 
+
+STEP 10:        for group in range (1, 6): 
+
+STEP 11:            IF group not in mentor_dict: 
+
+STEP 12:                mentor_dict[group_mentor_preference[group - 1][a_round]].append(group) 
+
+STEP 13:            ENDIF 
+
+STEP 14:        ENDFOR 
+
+STEP 15:        for key in mentor_dict: 
+
+STEP 16:            diff <- [i for i in set(mentor_dict[key]). difference (set(mentor_group_preference[int (key 		% 100) - 1]))] 
+
+STEP 17:             ENDIF 
+
+STEP 18:                      ENDFOR 
+
+STEP 19:            for value in diff: 
+
+STEP 20:                          ENDIF 
+
+STEP 21:                mentor_dict[key]. remove(value) 
+
+STEP 22:            ENDFOR 
+
+STEP 23:            while len(mentor_dict[key]) > 3: 
+
+STEP 24:                lowest_pref <- mentor_dict[key][0] 
+
+STEP 25:                for group in mentor_dict[key]: 
+
+STEP 26:                    IF mentor_group_preference[int (key % 100) - 1]. index(lowest_pref) <          mentor_group_preference[int (key % 100) - 1]. index(group): 
+
+STEP 27:                        lowest_pref <- group 
+
+STEP 28:                    ENDIF 
+
+STEP 29:                    mentor_dict[key]. remove(lowest_pref) 
+
+STEP 30:	    ENDFOR 
+
+STEP 31:            ENDWHILE		 
+
+STEP 32:        ENDFOR          
+
+STEP 33:	ENDFOR 
+
+STEP 34:    OUTPUT 'The final mentor allocations are:' 
+
+STEP 35:    for keys in mentor_dict: 
+
+STEP 36:        OUTPUT f'MENTOR {keys} HAS BEEN ALLOCATED THE FOLLOWING GROUPS:\n' 
+
+STEP 37:        for groups in keys: 
+
+STEP 38:            OUTPUT 'The groups under the mentor' 
+
+STEP 39: END 
